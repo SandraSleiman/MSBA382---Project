@@ -26,6 +26,9 @@ def load_data():
 
 df = load_data()
 
+st.write("COLUMN NAMES:", df.columns.tolist())
+
+
 # --- Sidebar filters ---
 st.sidebar.header("Filters")
 gender_filter = st.sidebar.multiselect("Select Gender", options=df["Gender"].unique(), default=df["Gender"].unique())
