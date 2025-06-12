@@ -26,14 +26,12 @@ def load_data():
 
 df = load_data()
 
-st.write("COLUMN NAMES:", df.columns.tolist())
-
 
 # --- Sidebar filters ---
 st.sidebar.header("Filters")
 gender_filter = st.sidebar.multiselect("Select Gender", options=df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
-alcohol_filter = st.sidebar.multiselect("Alcohol Level", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
+alcohol_filter = st.sidebar.multiselect("Alcohol consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
 exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
 
 # Apply filters
