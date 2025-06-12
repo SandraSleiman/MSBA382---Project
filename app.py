@@ -37,7 +37,7 @@ exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise freque
 filtered_df = df[
     (df["Gender"].isin(gender_filter)) &
     (df["Age"].between(*age_range)) &
-    (df["Alcohol_Level"].isin(alcohol_filter)) &
+    (df["Alcohol consumption"].isin(alcohol_filter)) &
     (df["Exercise frequency"].between(*exercise_range))
 ]
 
@@ -52,7 +52,7 @@ col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mea
 # --- Sleep Efficiency by Alcohol Level ---
 st.subheader("Sleep Efficiency by Alcohol Level")
 fig1, ax1 = plt.subplots()
-filtered_df.groupby("Alcohol_Level")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
+filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
 ax1.set_ylabel("Sleep Efficiency (%)")
 ax1.set_xlabel("Alcohol Consumption Level")
 st.pyplot(fig1)
