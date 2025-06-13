@@ -30,18 +30,22 @@ gender_filter = st.sidebar.multiselect("Select Gender", df["Gender"].unique(), d
 age_range = st.sidebar.slider("Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("Alcohol consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
 exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
+smoking_filter = st.sidebar.multiselect("Smoking Status", df["Smoking status"].unique(), default=df["Smoking status"].unique())
+caffeine_range = st.sidebar.slider("Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
 
 # --- Apply filters ---
 filtered_df = df[
     (df["Gender"].isin(gender_filter)) &
     (df["Age"].between(*age_range)) &
     (df["Alcohol consumption"].isin(alcohol_filter)) &
-    (df["Exercise frequency"].between(*exercise_range))
+    (df["Exercise frequency"].between(*exercise_range)) &
+    (df["Smoking status"].isin(smoking_filter)) &
+    (df["Caffeine consumption"].between(*caffeine_range))
 ]
 
 # --- Page Title ---
 st.title("🛏️ Sleep Health Dashboard")
-st.markdown("Analyze how lifestyle factors (alcohol, caffeine, exercise, age, gender) influence sleep quality.")
+st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
 # --- KPIs ---
 col1, col2 = st.columns(2)
@@ -51,7 +55,7 @@ col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mea
 st.markdown("---")
 st.subheader("📊 Sleep Visualizations")
 
-# First row
+# --- First row ---
 col1, col2 = st.columns(2)
 
 with col1:
@@ -70,7 +74,7 @@ with col2:
     ax2.set_ylabel("REM Sleep Percentage")
     st.pyplot(fig2)
 
-# Second row
+# --- Second row ---
 col3, col4 = st.columns(2)
 
 with col3:
@@ -86,45 +90,25 @@ with col4:
     fig4, ax4 = plt.subplots()
     filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax4)
     ax4.set_xlabel("Days per Week")
-    ax4.set_ylabel("Number of People")
+    ax4.set_ylabel("Number of Individuals")
     ax4.set_title("Exercise Frequency")
     st.pyplot(fig4)
 
-# Third row
+# --- Third row ---
 col5, col6 = st.columns(2)
 
 with col5:
     st.markdown("**Sleep Efficiency by Smoking Status**")
     fig5, ax5 = plt.subplots()
     filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax5)
-    ax5.set_ylabel("Sleep Efficiency (%)")
     ax5.set_xlabel("Smoking Status")
+    ax5.set_ylabel("Sleep Efficiency (%)")
+    ax5.set_title("Smoking vs Sleep Efficiency")
     st.pyplot(fig5)
 
 with col6:
     st.markdown("**Filtered Dataset Preview**")
     st.dataframe(filtered_df)
-
-# --- Third row ---
-col5, col6 = st.columns(2)
-
-with col5:
-    st.markdown("**Exercise Frequency Distribution**")
-    fig5, ax5 = plt.subplots()
-    filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax5)
-    ax5.set_xlabel("Days per Week")
-    ax5.set_ylabel("Number of Individuals")
-    ax5.set_title("Exercise Frequency")
-    st.pyplot(fig5)
-
-with col6:
-    st.markdown("**Sleep Efficiency by Smoking Status**")
-    fig6, ax6 = plt.subplots()
-    filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax6)
-    ax6.set_xlabel("Smoking Status")
-    ax6.set_ylabel("Sleep Efficiency (%)")
-    ax6.set_title("Smoking vs Sleep Efficiency")
-    st.pyplot(fig6)
 
 
 
