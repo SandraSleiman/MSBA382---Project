@@ -49,11 +49,9 @@ col1.metric("Average Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].m
 col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
 
 st.markdown("---")
-
-st.markdown("---")
 st.subheader("📊 Sleep Visualizations")
 
-# Create two columns for the first row
+# First row
 col1, col2 = st.columns(2)
 
 with col1:
@@ -84,8 +82,27 @@ with col3:
     st.pyplot(fig3)
 
 with col4:
+    st.markdown("**Exercise Frequency Distribution**")
+    fig4, ax4 = plt.subplots()
+    filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax4)
+    ax4.set_xlabel("Days per Week")
+    ax4.set_ylabel("Number of People")
+    ax4.set_title("Exercise Frequency")
+    st.pyplot(fig4)
+
+# Third row
+col5, col6 = st.columns(2)
+
+with col5:
+    st.markdown("**Sleep Efficiency by Smoking Status**")
+    fig5, ax5 = plt.subplots()
+    filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax5)
+    ax5.set_ylabel("Sleep Efficiency (%)")
+    ax5.set_xlabel("Smoking Status")
+    st.pyplot(fig5)
+
+with col6:
     st.markdown("**Filtered Dataset Preview**")
     st.dataframe(filtered_df)
-
 
 
