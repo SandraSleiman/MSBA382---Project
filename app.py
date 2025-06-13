@@ -16,12 +16,12 @@ if not st.session_state.authenticated:
     # --- Introductory text ---
     st.markdown("""
         <div style='text-align: center; padding-top: 10px;'>
-            <h1 style='font-size: 38px;'>💤 Sleep Health & Lifestyle Factors</h1>
+            <h1 style='font-size: 38px;'> Sleep Health & Lifestyle Factors</h1>
             <h3 style='font-size: 24px; color: #555;'>MSBA 382 — Healthcare Analytics Project</h3>
             <p style='font-size: 18px; max-width: 700px; margin: auto; color: #666;'>
                 Welcome to this interactive dashboard exploring how lifestyle habits such as
                 alcohol consumption, caffeine intake, smoking, and physical activity influence
-                sleep efficiency and duration.
+                sleep efficiency and duration
             </p>
         </div>
     """, unsafe_allow_html=True)
