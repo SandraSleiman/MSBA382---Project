@@ -50,32 +50,42 @@ col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mea
 
 st.markdown("---")
 
-# --- Visual 1: Sleep Efficiency by Alcohol ---
-st.subheader("📊 Sleep Efficiency by Alcohol Consumption")
-fig1, ax1 = plt.subplots()
-filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
-ax1.set_ylabel("Sleep Efficiency (%)")
-ax1.set_xlabel("Alcohol Consumption Level")
-st.pyplot(fig1)
+st.markdown("---")
+st.subheader("📊 Sleep Visualizations")
 
-# --- Visual 2: REM Sleep vs Caffeine ---
-st.subheader("🧠 REM Sleep % vs Caffeine Consumption")
-fig2, ax2 = plt.subplots()
-ax2.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
-ax2.set_xlabel("Caffeine Consumption")
-ax2.set_ylabel("REM Sleep Percentage")
-st.pyplot(fig2)
+# Create two columns for the first row
+col1, col2 = st.columns(2)
 
-# --- Visual 3: Sleep Duration by Gender ---
-st.subheader("👥 Sleep Duration by Gender")
-fig3, ax3 = plt.subplots()
-filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax3)
-ax3.set_title("Sleep Duration by Gender")
-ax3.set_ylabel("Hours")
-st.pyplot(fig3)
+with col1:
+    st.markdown("**Sleep Efficiency by Alcohol Consumption**")
+    fig1, ax1 = plt.subplots()
+    filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
+    ax1.set_ylabel("Sleep Efficiency (%)")
+    ax1.set_xlabel("Alcohol Consumption Level")
+    st.pyplot(fig1)
 
-# --- Data Table ---
-st.subheader("📄 Filtered Data Table")
-st.dataframe(filtered_df)
+with col2:
+    st.markdown("**REM Sleep % vs Caffeine Consumption**")
+    fig2, ax2 = plt.subplots()
+    ax2.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
+    ax2.set_xlabel("Caffeine Consumption")
+    ax2.set_ylabel("REM Sleep Percentage")
+    st.pyplot(fig2)
+
+# Second row
+col3, col4 = st.columns(2)
+
+with col3:
+    st.markdown("**Sleep Duration by Gender**")
+    fig3, ax3 = plt.subplots()
+    filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax3)
+    ax3.set_title("Sleep Duration by Gender")
+    ax3.set_ylabel("Hours")
+    st.pyplot(fig3)
+
+with col4:
+    st.markdown("**Filtered Dataset Preview**")
+    st.dataframe(filtered_df)
+
 
 
