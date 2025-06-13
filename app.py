@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-# --- Page config and password ---
-st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
+# --- Password protection ---
 PASSWORD = "osb2025"
+st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -32,7 +31,7 @@ age_range = st.sidebar.slider("Select Age Range", int(df["Age"].min()), int(df["
 alcohol_filter = st.sidebar.multiselect("Alcohol consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
 exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
 smoking_filter = st.sidebar.multiselect("Smoking Status", df["Smoking status"].unique(), default=df["Smoking status"].unique())
-caffeine_range = st.sidebar.slider("Caffeine Consumption Range", int(df["Caffeine consumption"].min()), int(df["Caffeine consumption"].max()), (0, 500))
+caffeine_range = st.sidebar.slider("Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
 
 # --- Apply filters ---
 filtered_df = df[
@@ -44,18 +43,21 @@ filtered_df = df[
     (df["Caffeine consumption"].between(*caffeine_range))
 ]
 
-# --- Page selection ---
-page = st.sidebar.radio("Navigate", ["Overview", "Lifestyle Impact", "Data Explorer"])
+# --- Page navigation ---
+st.sidebar.title("Go to")
+page = st.sidebar.radio("", ["Overview", "Visual Analysis", "Filtered Dataset"])
 
+# --- Overview Page ---
 if page == "Overview":
-    st.title("🛏️ Sleep Health Dashboard")
-    st.markdown("Understand how lifestyle factors impact sleep quality.")
+    st.title("🛌 Sleep Health Dashboard")
+    st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     col1, col2 = st.columns(2)
-    col1.metric("Average Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
-    col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
+    col1.metric("Avg Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
+    col2.metric("Avg Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
 
     st.markdown("---")
+    st.subheader("Key Visuals")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -63,59 +65,59 @@ if page == "Overview":
         fig1, ax1 = plt.subplots()
         filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
         ax1.set_ylabel("Sleep Efficiency (%)")
-        ax1.set_xlabel("Alcohol Consumption")
+        ax1.set_xlabel("Alcohol consumption")
         st.pyplot(fig1)
 
     with col2:
-        st.markdown("**REM Sleep % vs Caffeine Consumption**")
+        st.markdown("**Sleep Efficiency by Smoking Status**")
         fig2, ax2 = plt.subplots()
-        ax2.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
-        ax2.set_xlabel("Caffeine Consumption")
-        ax2.set_ylabel("REM Sleep %")
+        filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax2)
+        ax2.set_ylabel("Sleep Efficiency (%)")
+        ax2.set_xlabel("Smoking status")
         st.pyplot(fig2)
 
-elif page == "Lifestyle Impact":
-    st.title("💡 Lifestyle Factor Insights")
-    st.markdown("Explore how smoking, exercise, and gender influence sleep health.")
+# --- Visual Analysis Page ---
+elif page == "Visual Analysis":
+    st.title("🌐 Lifestyle Factors vs Sleep Metrics")
+    st.markdown("Explore how each factor correlates with sleep performance.")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("**REM Sleep % vs Caffeine Consumption**")
+        fig3, ax3 = plt.subplots()
+        ax3.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
+        ax3.set_xlabel("Caffeine Consumption")
+        ax3.set_ylabel("REM Sleep Percentage")
+        st.pyplot(fig3)
+
+    with col2:
+        st.markdown("**Sleep Duration by Gender**")
+        fig4, ax4 = plt.subplots()
+        filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax4)
+        ax4.set_title("Sleep Duration by Gender")
+        ax4.set_ylabel("Hours")
+        st.pyplot(fig4)
 
     col3, col4 = st.columns(2)
     with col3:
-        st.markdown("**Sleep Efficiency by Smoking Status**")
-        fig3, ax3 = plt.subplots()
-        filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax3)
-        ax3.set_ylabel("Sleep Efficiency (%)")
-        ax3.set_xlabel("Smoking Status")
-        st.pyplot(fig3)
+        st.markdown("**Exercise Frequency Distribution**")
+        fig5, ax5 = plt.subplots()
+        filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax5)
+        ax5.set_xlabel("Days per Week")
+        ax5.set_ylabel("Number of People")
+        ax5.set_title("Exercise Frequency")
+        st.pyplot(fig5)
 
     with col4:
-        st.markdown("**Exercise Frequency Distribution**")
-        fig4, ax4 = plt.subplots()
-        filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax4)
-        ax4.set_xlabel("Days per Week")
-        ax4.set_ylabel("Number of Individuals")
-        st.pyplot(fig4)
+        st.markdown("**Sleep Efficiency by Gender**")
+        fig6, ax6 = plt.subplots()
+        filtered_df.groupby("Gender")["Sleep efficiency"].mean().plot(kind="bar", ax=ax6)
+        ax6.set_ylabel("Sleep Efficiency (%)")
+        ax6.set_xlabel("Gender")
+        st.pyplot(fig6)
 
-    st.markdown("---")
-    st.markdown("**Sleep Duration by Gender**")
-    fig5, ax5 = plt.subplots()
-    filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax5)
-    ax5.set_title("Sleep Duration by Gender")
-    ax5.set_ylabel("Hours")
-    st.pyplot(fig5)
-
-elif page == "Data Explorer":
-    st.title("🔍 Data Explorer & Correlations")
-    st.markdown("Analyze the full dataset and explore correlations between variables.")
-
-    st.markdown("**Correlation Heatmap**")
-    fig6, ax6 = plt.subplots(figsize=(10, 6))
-    numeric_cols = filtered_df.select_dtypes(include=['number'])
-    sns.heatmap(numeric_cols.corr(), annot=True, cmap="coolwarm", ax=ax6)
-    st.pyplot(fig6)
-
-    st.markdown("---")
-    st.markdown("**Filtered Dataset Preview**")
-    st.dataframe(filtered_df)
-
-
+# --- Filtered Dataset Page ---
+elif page == "Filtered Dataset":
+    st.title("📃 Filtered Dataset Preview")
+    st.dataframe(filtered_df, use_container_width=True)
 
