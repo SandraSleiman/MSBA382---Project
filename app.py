@@ -105,4 +105,26 @@ with col6:
     st.markdown("**Filtered Dataset Preview**")
     st.dataframe(filtered_df)
 
+# --- Third row ---
+col5, col6 = st.columns(2)
+
+with col5:
+    st.markdown("**Exercise Frequency Distribution**")
+    fig5, ax5 = plt.subplots()
+    filtered_df["Exercise frequency"].value_counts().sort_index().plot(kind="bar", ax=ax5)
+    ax5.set_xlabel("Days per Week")
+    ax5.set_ylabel("Number of Individuals")
+    ax5.set_title("Exercise Frequency")
+    st.pyplot(fig5)
+
+with col6:
+    st.markdown("**Sleep Efficiency by Smoking Status**")
+    fig6, ax6 = plt.subplots()
+    filtered_df.groupby("Smoking status")["Sleep efficiency"].mean().plot(kind="bar", ax=ax6)
+    ax6.set_xlabel("Smoking Status")
+    ax6.set_ylabel("Sleep Efficiency (%)")
+    ax6.set_title("Smoking vs Sleep Efficiency")
+    st.pyplot(fig6)
+
+
 
