@@ -17,22 +17,21 @@ if not st.session_state.authenticated:
     else:
         st.stop()
 
-# --- Load cleaned data ---
+# --- Load data ---
 @st.cache_data
 def load_data():
-    df = pd.read_excel("Sleep Efficiency.xlsx")
-    return df
+    return pd.read_excel("Sleep Efficiency.xlsx")
 
 df = load_data()
 
 # --- Sidebar filters ---
 st.sidebar.title("Filters")
-gender_filter = st.sidebar.multiselect("Select Gender", options=df["Gender"].unique(), default=df["Gender"].unique())
+gender_filter = st.sidebar.multiselect("Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("Alcohol consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
 exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
 
-# Apply filters
+# --- Apply filters ---
 filtered_df = df[
     (df["Gender"].isin(gender_filter)) &
     (df["Age"].between(*age_range)) &
@@ -40,44 +39,43 @@ filtered_df = df[
     (df["Exercise frequency"].between(*exercise_range))
 ]
 
-# --- Navigation menu ---
-st.sidebar.title("Dashboard Views")
-view = st.sidebar.radio("Select a section", ["Overview KPIs", "Sleep Efficiency by Alcohol", "REM vs Caffeine", "Sleep Duration by Gender", "Raw Dataset"])
+# --- Page Title ---
+st.title("🛏️ Sleep Health Dashboard")
+st.markdown("Analyze how lifestyle factors (alcohol, caffeine, exercise, age, gender) influence sleep quality.")
 
-# --- Main dashboard ---
-st.title("Sleep Health Dashboard")
-st.markdown("Analyze how lifestyle factors affect sleep quality.")
+# --- KPIs ---
+col1, col2 = st.columns(2)
+col1.metric("Average Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
+col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
 
-if view == "Overview KPIs":
-    col1, col2 = st.columns(2)
-    col1.metric("Average Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
-    col2.metric("Average Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
+st.markdown("---")
 
-elif view == "Sleep Efficiency by Alcohol":
-    st.subheader("Sleep Efficiency by Alcohol Level")
-    fig1, ax1 = plt.subplots()
-    filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
-    ax1.set_ylabel("Sleep Efficiency (%)")
-    ax1.set_xlabel("Alcohol Consumption Level")
-    st.pyplot(fig1)
+# --- Visual 1: Sleep Efficiency by Alcohol ---
+st.subheader("📊 Sleep Efficiency by Alcohol Consumption")
+fig1, ax1 = plt.subplots()
+filtered_df.groupby("Alcohol consumption")["Sleep efficiency"].mean().plot(kind="bar", ax=ax1)
+ax1.set_ylabel("Sleep Efficiency (%)")
+ax1.set_xlabel("Alcohol Consumption Level")
+st.pyplot(fig1)
 
-elif view == "REM vs Caffeine":
-    st.subheader("REM Sleep % vs Caffeine Consumption")
-    fig2, ax2 = plt.subplots()
-    ax2.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
-    ax2.set_xlabel("Caffeine Consumption")
-    ax2.set_ylabel("REM Sleep Percentage")
-    st.pyplot(fig2)
+# --- Visual 2: REM Sleep vs Caffeine ---
+st.subheader("🧠 REM Sleep % vs Caffeine Consumption")
+fig2, ax2 = plt.subplots()
+ax2.scatter(filtered_df["Caffeine consumption"], filtered_df["REM sleep percentage"], alpha=0.6)
+ax2.set_xlabel("Caffeine Consumption")
+ax2.set_ylabel("REM Sleep Percentage")
+st.pyplot(fig2)
 
-elif view == "Sleep Duration by Gender":
-    st.subheader("Sleep Duration by Gender")
-    fig3, ax3 = plt.subplots()
-    filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax3)
-    ax3.set_title("Sleep Duration by Gender")
-    ax3.set_ylabel("Hours")
-    st.pyplot(fig3)
+# --- Visual 3: Sleep Duration by Gender ---
+st.subheader("👥 Sleep Duration by Gender")
+fig3, ax3 = plt.subplots()
+filtered_df.boxplot(column="Sleep duration", by="Gender", ax=ax3)
+ax3.set_title("Sleep Duration by Gender")
+ax3.set_ylabel("Hours")
+st.pyplot(fig3)
 
-elif view == "Raw Dataset":
-    st.subheader("Filtered Dataset Table")
-    st.dataframe(filtered_df)
+# --- Data Table ---
+st.subheader("📄 Filtered Data Table")
+st.dataframe(filtered_df)
+
 
