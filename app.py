@@ -11,7 +11,7 @@ if "authenticated" not in st.session_state:
 
 if not st.session_state.authenticated:
     # --- Cover page image ---
-    st.image("Cover Page.jpeg", use_column_width=True)
+    st.image("cover_page.jpeg", use_column_width=True)
 
     # --- Introductory text ---
     st.markdown("""
