@@ -10,30 +10,29 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # --- Cover page image ---
-    st.image("cover_page.jpeg", use_column_width=True)
-
-    # --- Introductory text ---
-    st.markdown("""
-        <div style='text-align: center; padding-top: 10px;'>
-            <h1 style='font-size: 38px;'> Sleep Health & Lifestyle Factors</h1>
-            <h3 style='font-size: 24px; color: #555;'>MSBA 382 — Healthcare Analytics Project</h3>
-            <p style='font-size: 18px; max-width: 700px; margin: auto; color: #666;'>
-                Welcome to this interactive dashboard exploring how lifestyle habits such as
-                alcohol consumption, caffeine intake, smoking, and physical activity influence
-                sleep efficiency and duration
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
-
-    # --- Password input ---
-    password = st.text_input("Enter password to access the dashboard", type="password")
+    # --- Sidebar password input ---
+    st.sidebar.title("Login")
+    password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
     if password == PASSWORD:
         st.session_state.authenticated = True
         st.rerun()
     else:
-        st.stop()
+        # --- Top text ---
+        st.markdown("""
+            <div style='text-align: center; padding-top: 10px;'>
+                <h1 style='font-size: 38px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h3 style='font-size: 24px; color: #555;'>MSBA 382 — Healthcare Analytics Project</h3>
+                <p style='font-size: 18px; max-width: 700px; margin: auto; color: #666;'>
+                    Welcome to this interactive dashboard exploring how lifestyle habits such as
+                    alcohol consumption, caffeine intake, smoking, and physical activity influence
+                    sleep efficiency and duration.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
 
+        # --- Cover image below text ---
+        st.image("cover_page.jpg", use_column_width=False, width=500)
+        st.stop()
 
 # --- Load data ---
 @st.cache_data
