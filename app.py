@@ -20,7 +20,7 @@ if not st.session_state.authenticated:
     with col1:
         st.markdown("""
             <div style='padding-top: 30px;'>
-                <h1 style='font-size: 40px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h1 style='font-size: 40px;'> Sleep Health & Lifestyle Factors</h1>
                 <h3 style='font-size: 24px; color: #777;'>MSBA 382 — Healthcare Analytics Project</h3>
                 <p style='font-size: 17px; max-width: 600px; color: #aaa;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
@@ -31,7 +31,7 @@ if not st.session_state.authenticated:
         """, unsafe_allow_html=True)
 
     with col2:
-        st.image("Cover Page.jpeg", width=280)
+        st.image("cover_page.jpeg", width=280)
 
     if password == PASSWORD:
         st.session_state.authenticated = True
