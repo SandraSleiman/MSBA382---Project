@@ -31,7 +31,7 @@ if not st.session_state.authenticated:
         """, unsafe_allow_html=True)
 
     with col2:
-        st.image("cover_page.jpg", width=280)
+        st.image("Cover Page.jpeg", width=280)
 
     if password == PASSWORD:
         st.session_state.authenticated = True
@@ -142,5 +142,6 @@ elif page == "Visual Analysis":
 elif page == "Filtered Dataset":
     st.title("📃 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
 
 
