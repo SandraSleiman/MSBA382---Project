@@ -71,7 +71,7 @@ page = st.sidebar.radio("", ["Overview", "Visual Analysis", "Filtered Dataset"])
 
 # --- Overview Page ---
 if page == "Overview":
-    st.title("🛌 Sleep Health Dashboard")
+    st.title("Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     col1, col2 = st.columns(2)
@@ -100,7 +100,7 @@ if page == "Overview":
 
 # --- Visual Analysis Page ---
 elif page == "Visual Analysis":
-    st.title("🌐 Lifestyle Factors vs Sleep Metrics")
+    st.title("Lifestyle Factors vs Sleep Metrics")
     st.markdown("Explore how each factor correlates with sleep performance.")
 
     col1, col2 = st.columns(2)
@@ -140,7 +140,7 @@ elif page == "Visual Analysis":
 
 # --- Filtered Dataset Page ---
 elif page == "Filtered Dataset":
-    st.title("📃 Filtered Dataset Preview")
+    st.title("Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
 
 
