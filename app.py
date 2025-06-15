@@ -6,7 +6,7 @@ st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 # --- Apply seaborn theme and color palette globally ---
 sns.set_theme(style="whitegrid")
-custom_colors = sns.color_palette("Set2", 2)
+sns.set_palette("Set2")  # Soft pastel tones
 
 # --- Custom CSS styling ---
 st.markdown("""
@@ -15,21 +15,16 @@ st.markdown("""
         color: #1a73e8;
         font-family: 'Helvetica Neue', sans-serif;
     }
-    section[data-testid="stSidebar"] {
-        background-color: #f1f8ff;
-    }
-    section[data-testid="stSidebar"] .stSlider,
-    section[data-testid="stSidebar"] .stMultiSelect {
-        background-color: #e3f2fd;
+    section[data-testid="stSidebar"] div.stSlider > div,
+    section[data-testid="stSidebar"] .stMultiSelect > div {
+        background-color: #E1F5FE;
         border-radius: 6px;
-        padding: 8px;
+        padding: 6px;
     }
-    .stSlider > div[data-baseweb] {
-        background-color: #d2e3fc !important;
-    }
-    .stMultiSelect [data-baseweb="tag"] {
-        background-color: #aedcff !important;
-        color: black !important;
+    section[data-testid="stSidebar"] .st-bw, .st-af {
+        background-color: #B2EBF2;
+        color: black;
+        border-radius: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -116,44 +111,43 @@ if page == "Dashboard":
     with cols[0]:
         st.markdown("**Sleep Efficiency by Alcohol Consumption (Grouped by Gender)**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Alcohol consumption", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax, palette=custom_colors)
+        sns.barplot(x="Alcohol consumption", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[1]:
         st.markdown("**Sleep Efficiency by Smoking Status**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Smoking status", y="Sleep efficiency", data=filtered_df, ax=ax, palette=custom_colors)
+        sns.barplot(x="Smoking status", y="Sleep efficiency", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[2]:
         st.markdown("**Sleep Efficiency by Gender**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Gender", y="Sleep efficiency", data=filtered_df, ax=ax, palette=custom_colors)
+        sns.barplot(x="Gender", y="Sleep efficiency", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     cols = st.columns(3)
     with cols[0]:
         st.markdown("**REM Sleep % vs Caffeine Consumption**")
         fig, ax = plt.subplots()
-        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", data=filtered_df, ax=ax, color=custom_colors[0])
+        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=custom_colors)
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[2]:
         st.markdown("**Exercise Frequency Distribution**")
         fig, ax = plt.subplots()
-        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax, color=custom_colors[1])
+        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
 # --- Filtered Dataset Page ---
 elif page == "Filtered Dataset":
     st.title("📃 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
-
 
 
