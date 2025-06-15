@@ -42,7 +42,18 @@ st.markdown("""
     input[type="range"]::-moz-range-track {
         background: #fc8d62 !important;
     }
-
+    input:focus, textarea:focus, select:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    section[data-testid="stSidebar"] .stTextInput input[type="password"] + div button {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -62,20 +73,6 @@ st.markdown("""
     .metric-box .value {
         font-size: 26px;
         margin-top: 5px;
-    }
-
-    /* FIX the small square around the eye icon in password field */
-    input:focus, textarea:focus, select:focus, button:focus, button:active,
-    .stTextInput input:focus-visible,
-    .stTextInput input:focus-within {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-
-    section[data-testid="stSidebar"] input[type="password"] + div button {
-        outline: none !important;
-        box-shadow: none !important;
-        border: none !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -190,7 +187,7 @@ if page == "Dashboard":
 
     cols = st.columns(3)
     with cols[0]:
-        st.markdown("**REM Sleep % vs Caffeine Consumption**")
+        st.markdown("**REM Sleep % vs Caffeine Consumption (Colored by Gender)**")
         fig, ax = plt.subplots()
         sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
@@ -198,7 +195,7 @@ if page == "Dashboard":
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax)
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=["#66c2a5", "#fc8d62"])
         st.pyplot(fig)
 
     with cols[2]:
@@ -211,5 +208,6 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
 
 
