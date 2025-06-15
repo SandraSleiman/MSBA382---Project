@@ -8,7 +8,7 @@ st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 sns.set_theme(style="whitegrid")
 sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 
-# --- Custom CSS styling for matching graph and filter colors + KPIs ---
+# --- Custom CSS styling for matching graph and filter colors + KPIs + slider tweaks ---
 st.markdown("""
     <style>
     h1, h2, h3 {
@@ -28,6 +28,14 @@ st.markdown("""
     section[data-testid="stSidebar"] .stSelectbox span {
         background-color: #66c2a5 !important;
         color: white !important;
+    }
+    /* Slider track and handle */
+    .stSlider > div > div > div:nth-child(1) > div {
+        background: #fc8d62 !important;
+    }
+    .stSlider .css-1c5xgju .css-1lcbmhc {
+        background-color: #fc8d62 !important;
+        border: 1px solid #fc8d62 !important;
     }
     .metric-container {
         display: flex;
@@ -183,4 +191,5 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
 
