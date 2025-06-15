@@ -29,13 +29,9 @@ st.markdown("""
         background-color: #66c2a5 !important;
         color: white !important;
     }
-    /* Slider track and handle */
-    .stSlider > div > div > div:nth-child(1) > div {
-        background: #fc8d62 !important;
-    }
-    .stSlider .css-1c5xgju .css-1lcbmhc {
+    /* Updated Slider track */
+    div[data-baseweb="slider"] > div > div:nth-child(1) > div {
         background-color: #fc8d62 !important;
-        border: 1px solid #fc8d62 !important;
     }
     .metric-container {
         display: flex;
@@ -191,5 +187,6 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
 
 
