@@ -75,14 +75,14 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.sidebar.title("🔒 Login")
+    st.sidebar.title("Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
     col1, col2 = st.columns([2, 2])
     with col1:
         st.markdown("""
             <div style='padding-top: 30px;'>
-                <h1 style='font-size: 42px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h1 style='font-size: 42px;'>Sleep Health & Lifestyle Factors</h1>
                 <h3 style='font-size: 24px;'>MSBA 382 — Healthcare Analytics Project</h3>
                 <p style='font-size: 17px; max-width: 600px;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
@@ -111,7 +111,7 @@ def load_data():
 df = load_data()
 
 # --- Sidebar filters ---
-st.sidebar.title("🔧 Filters")
+st.sidebar.title("Filters")
 gender_filter = st.sidebar.multiselect("👤 Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("🎂 Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("🍷 Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
@@ -120,7 +120,7 @@ smoking_filter = st.sidebar.multiselect("🚬 Smoking Status", df["Smoking statu
 caffeine_range = st.sidebar.slider("☕ Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
 
 # --- Page navigation ---
-st.sidebar.title("📌 Navigation")
+st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Dashboard", "Filtered Dataset"])
 
 # --- Apply filters ---
@@ -135,7 +135,7 @@ filtered_df = df[
 
 # --- Dashboard Page ---
 if page == "Dashboard":
-    st.title("🛏️ Sleep Health Dashboard")
+    st.title("Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     # KPI Section
