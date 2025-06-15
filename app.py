@@ -29,21 +29,18 @@ st.markdown("""
         background-color: #66c2a5 !important;
         color: white !important;
     }
-    .stSlider > div > div > div:nth-child(1) > div {
-        background: #fc8d62 !important;
-    }
-    .stSlider [role="slider"] {
-        background-color: #fc8d62 !important;
-        border: 1px solid #fc8d62 !important;
-    }
-    .stSlider > div > div > div:nth-child(1)::before {
-        background-color: #fc8d62 !important;
-    }
     input[type="range"]::-webkit-slider-runnable-track {
-        background: #fc8d62 !important;
+        background: #66c2a5 !important;
     }
     input[type="range"]::-moz-range-track {
-        background: #fc8d62 !important;
+        background: #66c2a5 !important;
+    }
+    .stSlider > div > div > div:nth-child(1)::before {
+        background-color: #66c2a5 !important;
+    }
+    .stSlider [role="slider"] {
+        background-color: #66c2a5 !important;
+        border: 1px solid #66c2a5 !important;
     }
     .metric-container {
         display: flex;
@@ -75,16 +72,16 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.sidebar.title("Login")
+    st.sidebar.title("🔒 Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
     col1, col2 = st.columns([2, 2])
     with col1:
         st.markdown("""
             <div style='padding-top: 30px;'>
-                <h1 style='font-size: 42px;'>Sleep Health & Lifestyle Factors</h1>
-                <h3 style='font-size: 24px;'>MSBA 382 — Healthcare Analytics Project</h3>
-                <p style='font-size: 17px; max-width: 600px;'>
+                <h1 style='font-size: 42px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h3 style='font-size: 24px; color: black;'>MSBA 382 — Healthcare Analytics Project</h3>
+                <p style='font-size: 17px; max-width: 600px; color: black;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
                     alcohol consumption, caffeine intake, smoking, and physical activity influence
                     sleep efficiency and duration.
@@ -111,7 +108,7 @@ def load_data():
 df = load_data()
 
 # --- Sidebar filters ---
-st.sidebar.title("Filters")
+st.sidebar.title("🔧 Filters")
 gender_filter = st.sidebar.multiselect("👤 Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("🎂 Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("🍷 Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
@@ -120,7 +117,7 @@ smoking_filter = st.sidebar.multiselect("🚬 Smoking Status", df["Smoking statu
 caffeine_range = st.sidebar.slider("☕ Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
 
 # --- Page navigation ---
-st.sidebar.title("Navigation")
+st.sidebar.title("📌 Navigation")
 page = st.sidebar.radio("Go to", ["Dashboard", "Filtered Dataset"])
 
 # --- Apply filters ---
@@ -135,7 +132,7 @@ filtered_df = df[
 
 # --- Dashboard Page ---
 if page == "Dashboard":
-    st.title("Sleep Health Dashboard")
+    st.title("🛏️ Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     # KPI Section
@@ -186,16 +183,17 @@ if page == "Dashboard":
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax)
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=["#66c2a5", "#fc8d62"])
         st.pyplot(fig)
 
     with cols[2]:
         st.markdown("**Exercise Frequency Distribution**")
         fig, ax = plt.subplots()
-        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax)
+        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax, color="#66c2a5")
         st.pyplot(fig)
 
 # --- Filtered Dataset Page ---
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
