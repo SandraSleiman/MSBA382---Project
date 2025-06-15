@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
+
 # --- Apply seaborn theme and color palette globally ---
 sns.set_theme(style="whitegrid")
 sns.set_palette("Set2")  # Vibrant and aesthetic
@@ -25,7 +27,6 @@ st.markdown("""
 
 # --- Password protection and intro page ---
 PASSWORD = "osb2025"
-st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
