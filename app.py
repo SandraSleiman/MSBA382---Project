@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
-# --- Apply seaborn theme and 2-color palette globally ---
+# --- Apply seaborn theme and color palette globally ---
 sns.set_theme(style="whitegrid")
-sns.set_palette(sns.color_palette("Set2", 2))  # Use 2-tone palette
+custom_colors = sns.color_palette("Set2", 2)
 
-# --- Custom CSS styling for a more aesthetic sidebar ---
+# --- Custom CSS styling ---
 st.markdown("""
     <style>
     h1, h2, h3 {
@@ -18,22 +18,30 @@ st.markdown("""
     section[data-testid="stSidebar"] {
         background-color: #f1f8ff;
     }
-    section[data-testid="stSidebar"] div.stSlider > div,
-    section[data-testid="stSidebar"] .stMultiSelect > div {
+    section[data-testid="stSidebar"] .stSlider,
+    section[data-testid="stSidebar"] .stMultiSelect {
         background-color: #e3f2fd;
-        border-radius: 5px;
-        padding: 6px;
+        border-radius: 6px;
+        padding: 8px;
+    }
+    .stSlider > div[data-baseweb] {
+        background-color: #d2e3fc !important;
+    }
+    .stMultiSelect [data-baseweb="tag"] {
+        background-color: #aedcff !important;
+        color: black !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- Password protection ---
+# --- Password protection and intro page ---
 PASSWORD = "osb2025"
+
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # Sidebar password input
+    # --- Sidebar password input ---
     st.sidebar.title("🔒 Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
@@ -106,40 +114,40 @@ if page == "Dashboard":
 
     cols = st.columns(3)
     with cols[0]:
-        st.markdown("**Sleep Efficiency by Alcohol Consumption**")
+        st.markdown("**Sleep Efficiency by Alcohol Consumption (Grouped by Gender)**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Alcohol consumption", y="Sleep efficiency", data=filtered_df, ax=ax)
+        sns.barplot(x="Alcohol consumption", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax, palette=custom_colors)
         st.pyplot(fig)
 
     with cols[1]:
         st.markdown("**Sleep Efficiency by Smoking Status**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Smoking status", y="Sleep efficiency", data=filtered_df, ax=ax)
+        sns.barplot(x="Smoking status", y="Sleep efficiency", data=filtered_df, ax=ax, palette=custom_colors)
         st.pyplot(fig)
 
     with cols[2]:
         st.markdown("**Sleep Efficiency by Gender**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Gender", y="Sleep efficiency", data=filtered_df, ax=ax)
+        sns.barplot(x="Gender", y="Sleep efficiency", data=filtered_df, ax=ax, palette=custom_colors)
         st.pyplot(fig)
 
     cols = st.columns(3)
     with cols[0]:
         st.markdown("**REM Sleep % vs Caffeine Consumption**")
         fig, ax = plt.subplots()
-        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", data=filtered_df, ax=ax)
+        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", data=filtered_df, ax=ax, color=custom_colors[0])
         st.pyplot(fig)
 
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax)
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=custom_colors)
         st.pyplot(fig)
 
     with cols[2]:
         st.markdown("**Exercise Frequency Distribution**")
         fig, ax = plt.subplots()
-        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax)
+        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax, color=custom_colors[1])
         st.pyplot(fig)
 
 # --- Filtered Dataset Page ---
