@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 # --- Apply seaborn theme and color palette globally ---
@@ -184,3 +183,4 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
