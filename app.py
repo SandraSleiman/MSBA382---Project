@@ -30,9 +30,9 @@ if not st.session_state.authenticated:
         """, unsafe_allow_html=True)
     with col2:
         try:
-            st.image("cover_page.jpg", width=280)
+            st.image("cover_page.jpeg", width=280)
         except:
-            st.warning("Image not found. Please ensure 'cover_page.jpg' is in the same folder.")
+            st.warning("Image not found. Please ensure 'cover_page.jpeg' is in the same folder.")
 
     if password == PASSWORD:
         st.session_state.authenticated = True
