@@ -66,7 +66,7 @@ st.markdown("""
         outline: none !important;
         box-shadow: none !important;
     }
-    button[title="Show password"]:focus, 
+    button[title="Show password"]:focus,
     button[title="Hide password"]:focus {
         outline: none !important;
         box-shadow: none !important;
@@ -74,7 +74,6 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
 
 # --- Password protection and intro page ---
 PASSWORD = "osb2025"
@@ -181,7 +180,7 @@ if page == "Dashboard":
     with cols[2]:
         st.markdown("**Sleep Efficiency by Gender**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Gender", y="Sleep efficiency", data=filtered_df, ax=ax)
+        sns.barplot(x="Gender", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax, dodge=False)
         st.pyplot(fig)
 
     cols = st.columns(3)
@@ -194,7 +193,7 @@ if page == "Dashboard":
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=["#66c2a5", "#fc8d62"])
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, hue="Gender")
         st.pyplot(fig)
 
     with cols[2]:
