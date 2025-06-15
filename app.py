@@ -42,18 +42,6 @@ st.markdown("""
     input[type="range"]::-moz-range-track {
         background: #fc8d62 !important;
     }
-    input:focus, textarea:focus, select:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-    section[data-testid="stSidebar"] .stTextInput input[type="password"] + div button {
-        outline: none !important;
-        box-shadow: none !important;
-        border: none !important;
-        background: transparent !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -74,8 +62,19 @@ st.markdown("""
         font-size: 26px;
         margin-top: 5px;
     }
+    input:focus, textarea:focus, select:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    button[title="Show password"]:focus, 
+    button[title="Hide password"]:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
     </style>
 """, unsafe_allow_html=True)
+
 
 # --- Password protection and intro page ---
 PASSWORD = "osb2025"
