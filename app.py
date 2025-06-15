@@ -29,18 +29,18 @@ st.markdown("""
         background-color: #66c2a5 !important;
         color: white !important;
     }
-    input[type="range"]::-webkit-slider-runnable-track {
-        background: #66c2a5 !important;
-    }
-    input[type="range"]::-moz-range-track {
-        background: #66c2a5 !important;
-    }
-    .stSlider > div > div > div:nth-child(1)::before {
-        background-color: #66c2a5 !important;
+    .stSlider > div > div > div:nth-child(1) > div {
+        background: #fc8d62 !important;
     }
     .stSlider [role="slider"] {
-        background-color: #66c2a5 !important;
-        border: 1px solid #66c2a5 !important;
+        background-color: #fc8d62 !important;
+        border: 1px solid #fc8d62 !important;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+        background: #fc8d62 !important;
+    }
+    input[type="range"]::-moz-range-track {
+        background: #fc8d62 !important;
     }
     .metric-container {
         display: flex;
@@ -80,7 +80,7 @@ if not st.session_state.authenticated:
         st.markdown("""
             <div style='padding-top: 30px;'>
                 <h1 style='font-size: 42px;'>💤 Sleep Health & Lifestyle Factors</h1>
-                <h3 style='font-size: 24px; color: black;'>MSBA 382 — Healthcare Analytics Project</h3>
+                <h3 style='font-size: 24px;'>MSBA 382 — Healthcare Analytics Project</h3>
                 <p style='font-size: 17px; max-width: 600px; color: black;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
                     alcohol consumption, caffeine intake, smoking, and physical activity influence
@@ -162,9 +162,9 @@ if page == "Dashboard":
         st.pyplot(fig)
 
     with cols[1]:
-        st.markdown("**Sleep Efficiency by Smoking Status**")
+        st.markdown("**Sleep Efficiency by Smoking Status (Grouped by Gender)**")
         fig, ax = plt.subplots()
-        sns.barplot(x="Smoking status", y="Sleep efficiency", data=filtered_df, ax=ax)
+        sns.barplot(x="Smoking status", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[2]:
@@ -177,19 +177,19 @@ if page == "Dashboard":
     with cols[0]:
         st.markdown("**REM Sleep % vs Caffeine Consumption**")
         fig, ax = plt.subplots()
-        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", data=filtered_df, ax=ax)
+        sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[1]:
         st.markdown("**Sleep Duration by Gender**")
         fig, ax = plt.subplots()
-        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, palette=["#66c2a5", "#fc8d62"])
+        sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[2]:
-        st.markdown("**Exercise Frequency Distribution**")
+        st.markdown("**Exercise Frequency Distribution (Grouped by Gender)**")
         fig, ax = plt.subplots()
-        sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax, color="#66c2a5")
+        sns.countplot(x="Exercise frequency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
 # --- Filtered Dataset Page ---
