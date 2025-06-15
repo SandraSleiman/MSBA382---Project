@@ -29,7 +29,6 @@ st.markdown("""
         background-color: #66c2a5 !important;
         color: white !important;
     }
-    /* Slider track */
     .stSlider > div > div > div:nth-child(1) > div {
         background: #fc8d62 !important;
     }
@@ -83,9 +82,9 @@ if not st.session_state.authenticated:
     with col1:
         st.markdown("""
             <div style='padding-top: 30px;'>
-                <h1 style='font-size: 42px; color: #1a73e8;'>💤 Sleep Health & Lifestyle Factors</h1>
-                <h3 style='font-size: 24px; color: #555;'>MSBA 382 — Healthcare Analytics Project</h3>
-                <p style='font-size: 17px; max-width: 600px; color: #666;'>
+                <h1 style='font-size: 42px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h3 style='font-size: 24px;'>MSBA 382 — Healthcare Analytics Project</h3>
+                <p style='font-size: 17px; max-width: 600px;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
                     alcohol consumption, caffeine intake, smoking, and physical activity influence
                     sleep efficiency and duration.
@@ -94,7 +93,7 @@ if not st.session_state.authenticated:
         """, unsafe_allow_html=True)
     with col2:
         try:
-            st.image("cover_page.jpeg", width=380)
+            st.image("cover_page.jpeg", width=400)
         except:
             st.warning("Image not found. Please ensure 'cover_page.jpeg' is in the same folder.")
 
@@ -195,11 +194,6 @@ if page == "Dashboard":
         fig, ax = plt.subplots()
         sns.countplot(x="Exercise frequency", data=filtered_df, ax=ax)
         st.pyplot(fig)
-
-# --- Filtered Dataset Page ---
-elif page == "Filtered Dataset":
-    st.title("📄 Filtered Dataset Preview")
-    st.dataframe(filtered_df, use_container_width=True)
 
 # --- Filtered Dataset Page ---
 elif page == "Filtered Dataset":
