@@ -62,6 +62,10 @@ st.markdown("""
         font-size: 26px;
         margin-top: 5px;
     }
+    input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
