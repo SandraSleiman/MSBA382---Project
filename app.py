@@ -166,38 +166,38 @@ if page == "Dashboard":
 
     cols = st.columns(3)
     with cols[0]:
-        st.markdown("**Sleep Efficiency by Alcohol Consumption\n(Grouped by Gender)**")
+        st.markdown("**Sleep Efficiency by Alcohol Consumption**")
         fig, ax = plt.subplots()
         sns.barplot(x="Alcohol consumption", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[1]:
-        st.markdown("**Sleep Efficiency by Smoking Status (Grouped by Gender)**")
+        st.markdown("**Sleep Efficiency by Smoking Status**")
         fig, ax = plt.subplots()
         sns.barplot(x="Smoking status", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[2]:
-        st.markdown("**Sleep Efficiency by Gender**")
+        st.markdown("**Sleep Efficiency**")
         fig, ax = plt.subplots()
         sns.barplot(x="Gender", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax, dodge=False)
         st.pyplot(fig)
 
     cols = st.columns(3)
     with cols[0]:
-        st.markdown("**REM Sleep % vs Caffeine Consumption (Colored by Gender)**")
+        st.markdown("**REM Sleep % vs Caffeine Consumption**")
         fig, ax = plt.subplots()
         sns.scatterplot(x="Caffeine consumption", y="REM sleep percentage", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
 
     with cols[1]:
-        st.markdown("**Sleep Duration by Gender**")
+        st.markdown("**Sleep Duration**")
         fig, ax = plt.subplots()
         sns.boxplot(x="Gender", y="Sleep duration", data=filtered_df, ax=ax, hue="Gender")
         st.pyplot(fig)
 
     with cols[2]:
-        st.markdown("**Exercise Frequency Distribution (Grouped by Gender)**")
+        st.markdown("**Exercise Frequency Distribution**")
         fig, ax = plt.subplots()
         sns.countplot(x="Exercise frequency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
