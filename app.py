@@ -6,9 +6,9 @@ st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 # --- Apply seaborn theme and color palette globally ---
 sns.set_theme(style="whitegrid")
-sns.set_palette("Set2")  # Soft pastel tones
+sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 
-# --- Custom CSS styling ---
+# --- Custom CSS styling for matching graph and filter colors ---
 st.markdown("""
     <style>
     h1, h2, h3 {
@@ -16,15 +16,17 @@ st.markdown("""
         font-family: 'Helvetica Neue', sans-serif;
     }
     section[data-testid="stSidebar"] div.stSlider > div,
-    section[data-testid="stSidebar"] .stMultiSelect > div {
-        background-color: #E1F5FE;
-        border-radius: 6px;
+    section[data-testid="stSidebar"] .stMultiSelect > div,
+    section[data-testid="stSidebar"] .stSelectbox > div,
+    section[data-testid="stSidebar"] .stTextInput > div {
+        background-color: #ccece6;
+        border-radius: 5px;
         padding: 6px;
     }
-    section[data-testid="stSidebar"] .st-bw, .st-af {
-        background-color: #B2EBF2;
-        color: black;
-        border-radius: 5px;
+    section[data-testid="stSidebar"] .stMultiSelect span,
+    section[data-testid="stSidebar"] .stSelectbox span {
+        background-color: #66c2a5 !important;
+        color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -36,7 +38,6 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # --- Sidebar password input ---
     st.sidebar.title("🔒 Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
@@ -73,7 +74,7 @@ def load_data():
 df = load_data()
 
 # --- Sidebar filters ---
-st.sidebar.title("🧰 Filters")
+st.sidebar.title("🔧 Filters")
 gender_filter = st.sidebar.multiselect("👤 Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("🎂 Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("🍷 Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
@@ -97,19 +98,19 @@ filtered_df = df[
 
 # --- Dashboard Page ---
 if page == "Dashboard":
-    st.title("🛌 Sleep Health Dashboard")
+    st.title("🛏️ Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     col1, col2, col3 = st.columns(3)
     col1.metric("🌙 Avg Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
-    col2.metric("🕒 Avg Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
+    col2.metric("⏱ Avg Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
     col3.metric("☕ Avg Caffeine (mg)", f"{filtered_df['Caffeine consumption'].mean():.0f}")
 
     st.markdown("---")
 
     cols = st.columns(3)
     with cols[0]:
-        st.markdown("**Sleep Efficiency by Alcohol Consumption (Grouped by Gender)**")
+        st.markdown("**Sleep Efficiency by Alcohol Consumption\n(Grouped by Gender)**")
         fig, ax = plt.subplots()
         sns.barplot(x="Alcohol consumption", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax)
         st.pyplot(fig)
@@ -147,7 +148,6 @@ if page == "Dashboard":
 
 # --- Filtered Dataset Page ---
 elif page == "Filtered Dataset":
-    st.title("📃 Filtered Dataset Preview")
+    st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
-
 
