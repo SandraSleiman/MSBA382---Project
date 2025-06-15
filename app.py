@@ -23,6 +23,7 @@ st.markdown("""
         background-color: #ccece6;
         border-radius: 5px;
         padding: 6px;
+        border: 2px solid #fc8d62;
     }
     section[data-testid="stSidebar"] .stMultiSelect span,
     section[data-testid="stSidebar"] .stSelectbox span {
@@ -183,4 +184,3 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
-
