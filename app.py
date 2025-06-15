@@ -37,6 +37,9 @@ st.markdown("""
         background-color: #fc8d62 !important;
         border: 1px solid #fc8d62 !important;
     }
+    .stSlider > div > div > div:nth-child(1)::before {
+        background-color: #fc8d62 !important;
+    }
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -70,11 +73,11 @@ if not st.session_state.authenticated:
     st.sidebar.title("🔒 Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
-    col1, col2 = st.columns([3, 2])
+    col1, col2 = st.columns([2, 2])
     with col1:
         st.markdown("""
             <div style='padding-top: 30px;'>
-                <h1 style='font-size: 40px;'>💤 Sleep Health & Lifestyle Factors</h1>
+                <h1 style='font-size: 42px;'>💤 Sleep Health & Lifestyle Factors</h1>
                 <h3 style='font-size: 24px; color: #555;'>MSBA 382 — Healthcare Analytics Project</h3>
                 <p style='font-size: 17px; max-width: 600px; color: #666;'>
                     Welcome to this interactive dashboard exploring how lifestyle habits such as
@@ -85,7 +88,7 @@ if not st.session_state.authenticated:
         """, unsafe_allow_html=True)
     with col2:
         try:
-            st.image("cover_page.jpeg", width=250)
+            st.image("cover_page.jpeg", width=320)
         except:
             st.warning("Image not found. Please ensure 'cover_page.jpeg' is in the same folder.")
 
@@ -191,5 +194,3 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📄 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
-
-
