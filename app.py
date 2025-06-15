@@ -108,7 +108,7 @@ def load_data():
 df = load_data()
 
 # --- Sidebar filters ---
-st.sidebar.title("🔧 Filters")
+st.sidebar.title("Filters")
 gender_filter = st.sidebar.multiselect("👤 Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
 age_range = st.sidebar.slider("🎂 Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
 alcohol_filter = st.sidebar.multiselect("🍷 Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
