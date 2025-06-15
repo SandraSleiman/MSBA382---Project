@@ -132,7 +132,7 @@ filtered_df = df[
 
 # --- Dashboard Page ---
 if page == "Dashboard":
-    st.title("🛏️ Sleep Health Dashboard")
+    st.title("Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
     # KPI Section
