@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
 # --- Apply seaborn theme and color palette globally ---
 sns.set_theme(style="whitegrid")
 sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 
-# --- Custom CSS styling for matching graph and filter colors ---
+# --- Custom CSS styling for matching graph and filter colors + KPIs ---
 st.markdown("""
     <style>
     h1, h2, h3 {
@@ -27,6 +28,26 @@ st.markdown("""
     section[data-testid="stSidebar"] .stSelectbox span {
         background-color: #66c2a5 !important;
         color: white !important;
+    }
+    .metric-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+    .metric-box {
+        background: linear-gradient(90deg, #66c2a5, #fc8d62);
+        border-radius: 8px;
+        padding: 20px;
+        width: 100%;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .metric-box .value {
+        font-size: 26px;
+        margin-top: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -101,12 +122,24 @@ if page == "Dashboard":
     st.title("🛏️ Sleep Health Dashboard")
     st.markdown("Analyze how lifestyle factors (alcohol, caffeine, smoking, exercise, age, gender) influence sleep quality.")
 
-    col1, col2, col3 = st.columns(3)
-    col1.metric("🌙 Avg Sleep Efficiency (%)", f"{filtered_df['Sleep efficiency'].mean():.2f}")
-    col2.metric("⏱ Avg Sleep Duration (hrs)", f"{filtered_df['Sleep duration'].mean():.2f}")
-    col3.metric("☕ Avg Caffeine (mg)", f"{filtered_df['Caffeine consumption'].mean():.0f}")
-
-    st.markdown("---")
+    # KPI Section
+    st.markdown("""
+        <div class="metric-container">
+            <div class="metric-box">
+                🌙 Avg Sleep Efficiency (%)<div class="value">{:.2f}</div>
+            </div>
+            <div class="metric-box">
+                ⏱ Avg Sleep Duration (hrs)<div class="value">{:.2f}</div>
+            </div>
+            <div class="metric-box">
+                ☕ Avg Caffeine (mg)<div class="value">{:.0f}</div>
+            </div>
+        </div>
+    """.format(
+        filtered_df['Sleep efficiency'].mean(),
+        filtered_df['Sleep duration'].mean(),
+        filtered_df['Caffeine consumption'].mean()
+    ), unsafe_allow_html=True)
 
     cols = st.columns(3)
     with cols[0]:
