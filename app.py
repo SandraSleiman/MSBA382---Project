@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 # --- Password protection and intro page ---
 PASSWORD = "osb2025"
