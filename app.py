@@ -4,34 +4,36 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 
-# --- Apply seaborn theme and color palette globally ---
+# --- Apply seaborn theme and 2-color palette globally ---
 sns.set_theme(style="whitegrid")
-sns.set_palette("Set2")  # Vibrant and aesthetic
+sns.set_palette(sns.color_palette("Set2", 2))  # Use 2-tone palette
 
-# --- Custom CSS styling ---
+# --- Custom CSS styling for a more aesthetic sidebar ---
 st.markdown("""
     <style>
     h1, h2, h3 {
         color: #1a73e8;
         font-family: 'Helvetica Neue', sans-serif;
     }
+    section[data-testid="stSidebar"] {
+        background-color: #f1f8ff;
+    }
     section[data-testid="stSidebar"] div.stSlider > div,
     section[data-testid="stSidebar"] .stMultiSelect > div {
-        background-color: #E3F2FD;
+        background-color: #e3f2fd;
         border-radius: 5px;
         padding: 6px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- Password protection and intro page ---
+# --- Password protection ---
 PASSWORD = "osb2025"
-
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    # --- Sidebar password input ---
+    # Sidebar password input
     st.sidebar.title("🔒 Login")
     password = st.sidebar.text_input("Enter password to access the dashboard", type="password")
 
@@ -144,5 +146,6 @@ if page == "Dashboard":
 elif page == "Filtered Dataset":
     st.title("📃 Filtered Dataset Preview")
     st.dataframe(filtered_df, use_container_width=True)
+
 
 
