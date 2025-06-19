@@ -15,6 +15,8 @@ st.markdown("""
         color: #1a73e8;
         font-family: 'Helvetica Neue', sans-serif;
     }
+
+    /* Sidebar filter box styles */
     section[data-testid="stSidebar"] div.stSlider > div,
     section[data-testid="stSidebar"] .stMultiSelect > div,
     section[data-testid="stSidebar"] .stSelectbox > div,
@@ -24,11 +26,15 @@ st.markdown("""
         padding: 6px;
         border: 2px solid #fc8d62;
     }
+
+    /* Filter tag colors */
     section[data-testid="stSidebar"] .stMultiSelect span,
     section[data-testid="stSidebar"] .stSelectbox span {
         background-color: #66c2a5 !important;
         color: white !important;
     }
+
+    /* Slider styles */
     .stSlider > div > div > div:nth-child(1) > div {
         background: #fc8d62 !important;
     }
@@ -42,6 +48,8 @@ st.markdown("""
     input[type="range"]::-moz-range-track {
         background: #fc8d62 !important;
     }
+
+    /* KPI card styles */
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -62,15 +70,30 @@ st.markdown("""
         font-size: 26px;
         margin-top: 5px;
     }
+
+    /* Remove unwanted highlights on input focus */
     input:focus, textarea:focus, select:focus {
         outline: none !important;
         box-shadow: none !important;
     }
+
+    /* Remove square border around password toggle icon */
     button[title="Show password"]:focus,
     button[title="Hide password"]:focus {
         outline: none !important;
         box-shadow: none !important;
         border: none !important;
+    }
+
+    /* Ensure all text is white in dark mode */
+    body, p, h1, h2, h3, h4, h5, h6, label, span, div {
+        color: #ffffff !important;
+    }
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] div,
+    .stTextInput label {
+        color: #ffffff !important;
     }
     </style>
 """, unsafe_allow_html=True)
