@@ -178,7 +178,7 @@ if page == "Dashboard":
         st.pyplot(fig)
 
     with cols[2]:
-        st.markdown("**Sleep Efficiency**")
+        st.markdown("**Sleep Efficiency by Gender**")
         fig, ax = plt.subplots()
         sns.barplot(x="Gender", y="Sleep efficiency", hue="Gender", data=filtered_df, ax=ax, dodge=False)
         st.pyplot(fig)
