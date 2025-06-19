@@ -111,7 +111,7 @@ if not st.session_state.authenticated:
     col1, col2 = st.columns([2, 2])
     
     with col1:
-    st.markdown("""
+        st.markdown("""
     <div style='padding-top: 30px; color: white;'>
         <h1 style='font-size: 42px; color: white;'>Sleep Health & Lifestyle Factors</h1>
         <h3 style='font-size: 24px; color: white;'>MSBA 382 — Healthcare Analytics Project</h3>
