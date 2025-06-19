@@ -145,11 +145,11 @@ df = load_data()
 # --- Sidebar filters ---
 st.sidebar.title("Filters")
 gender_filter = st.sidebar.multiselect("👤 Select Gender", df["Gender"].unique(), default=df["Gender"].unique())
-age_range = st.sidebar.slider("🎂 Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
-alcohol_filter = st.sidebar.multiselect("🍷 Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
-exercise_range = st.sidebar.slider("🏃 Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
-smoking_filter = st.sidebar.multiselect("🚬 Smoking Status", df["Smoking status"].unique(), default=df["Smoking status"].unique())
-caffeine_range = st.sidebar.slider("☕ Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
+age_range = st.sidebar.slider("Select Age Range", int(df["Age"].min()), int(df["Age"].max()), (20, 60))
+alcohol_filter = st.sidebar.multiselect("Alcohol Consumption", df["Alcohol consumption"].unique(), default=df["Alcohol consumption"].unique())
+exercise_range = st.sidebar.slider("Exercise Frequency", int(df["Exercise frequency"].min()), int(df["Exercise frequency"].max()), (0, 7))
+smoking_filter = st.sidebar.multiselect("Smoking Status", df["Smoking status"].unique(), default=df["Smoking status"].unique())
+caffeine_range = st.sidebar.slider("Caffeine Consumption", float(df["Caffeine consumption"].min()), float(df["Caffeine consumption"].max()), (0.0, 300.0))
 
 # --- Page navigation ---
 st.sidebar.title("Navigation")
