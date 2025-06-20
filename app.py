@@ -165,6 +165,11 @@ st.markdown("""
         color: #ffffff !important;
     }
 
+    /* Optional: fix hover style */
+    [data-testid="stElementToolbar"] button:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
