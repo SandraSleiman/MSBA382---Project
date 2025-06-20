@@ -342,6 +342,43 @@ button[data-testid="stBaseButton-elementToolbar"]:hover {
     background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
+<style>
+/* 🔧 Fix remaining white square on expand icon in chart toolbar */
+button[title="View fullscreen"],
+button[title="Download image"],
+button[title="Zoom"],
+button[title="Pan"],
+button[title="Reset axes"],
+button[title="Autoscale"],
+button[title="Save as..."],
+button[title="Download as CSV"],
+div[data-testid="stElementToolbar"] button {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Remove any white box from pseudo-elements */
+button[title="View fullscreen"]::before,
+button[title="View fullscreen"]::after,
+div[data-testid="stElementToolbar"] button::before,
+div[data-testid="stElementToolbar"] button::after {
+    content: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Force the expand icon to be white */
+button[title="View fullscreen"] svg,
+div[data-testid="stElementToolbar"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+</style>
+
+
 </style>
 """, unsafe_allow_html=True)
 
