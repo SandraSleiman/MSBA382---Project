@@ -171,15 +171,11 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ✅ FINAL FIX for white hover square on expand/search/download icons */
-[data-testid="stElementToolbar"] {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-}
+/* ✅ FINAL FIX: Remove white hover box and ensure expand/search/download icons are white */
 
-/* Fix icon button container */
-[data-testid="stElementToolbar"] button {
+/* Target the button and its icon */
+[data-testid="stElementToolbar"] button[kind="icon"],
+[data-testid="stElementToolbar"] button[kind="icon"] svg {
     background-color: transparent !important;
     color: #ffffff !important;
     fill: #ffffff !important;
@@ -187,28 +183,34 @@ div[data-testid="stElementToolbar"] button:hover {
     box-shadow: none !important;
 }
 
-/* Force icon SVG (expand/search/download) to stay white */
-[data-testid="stElementToolbar"] svg {
+/* When hovering over the icon */
+[data-testid="stElementToolbar"] button[kind="icon"]:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
     color: #ffffff !important;
     fill: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* Remove the rounded white tooltip bubble on hover */
-[data-testid="stElementToolbar"]::before {
-    display: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    border: none !important;
+/* Remove the ghost white box that appears when hovering */
+[data-testid="stElementToolbar"]::before,
+[data-testid="stElementToolbar"] *::before {
     content: none !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: none !important;
 }
 
-/* Fix Streamlit popup tooltip as well */
-button[title="Expand"]:hover,
-button[title="Search"]:hover,
-button[title="Download"]:hover {
-    background-color: rgba(255,255,255,0.1) !important;
+/* Also fix the container's background */
+[data-testid="stElementToolbar"],
+[data-testid="stElementToolbar"] * {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
     border: none !important;
 }
+
 
 </style>
 """, unsafe_allow_html=True)
