@@ -8,6 +8,98 @@ st.set_page_config(page_title="Sleep Health Dashboard", layout="wide")
 sns.set_theme(style="whitegrid")
 sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 
+<style>
+/* --- Global Dark Theme --- */
+html, body, .main, .block-container, .stApp, section.main {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+}
+body, p, h1, h2, h3, h4, h5, h6, label, span, div {
+    color: #ffffff !important;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* --- Sidebar --- */
+section[data-testid="stSidebar"] {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+}
+section[data-testid="stSidebar"] div.stSlider > div,
+section[data-testid="stSidebar"] .stMultiSelect > div,
+section[data-testid="stSidebar"] .stSelectbox > div,
+section[data-testid="stSidebar"] .stTextInput > div {
+    background-color: #ccece6;
+    border-radius: 5px;
+    padding: 6px;
+    border: 2px solid #fc8d62;
+}
+section[data-testid="stSidebar"] .stMultiSelect span,
+section[data-testid="stSidebar"] .stSelectbox span {
+    background-color: #66c2a5 !important;
+    color: white !important;
+}
+.stSlider > div > div > div:nth-child(1) > div {
+    background: #fc8d62 !important;
+}
+.stSlider [role="slider"] {
+    background-color: #fc8d62 !important;
+    border: 1px solid #fc8d62 !important;
+}
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-moz-range-track {
+    background: #fc8d62 !important;
+}
+section[data-testid="stSidebar"] .stSlider label,
+section[data-testid="stSidebar"] .stSlider span,
+section[data-testid="stSidebar"] .stSlider div {
+    color: #ffffff !important;
+}
+
+/* --- KPI Cards --- */
+.metric-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+.metric-box {
+    background: linear-gradient(90deg, #66c2a5, #fc8d62);
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.metric-box .value {
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+/* --- Fix Toolbar Icons (Expand, Download, Search) --- */
+[data-testid="stElementToolbar"] svg,
+[data-testid="stElementToolbarButtonIcon"] {
+    fill: white !important;
+    stroke: white !important;
+    color: white !important;
+}
+[data-testid="stElementToolbar"] button,
+button[aria-label="Download"],
+button[aria-label="Expand"],
+button[aria-label="Search"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+[data-testid="stElementToolbar"] button:hover,
+button[aria-label="Download"]:hover,
+button[aria-label="Expand"]:hover,
+button[aria-label="Search"]:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+    border-radius: 6px;
+}
+</style>
 
 
 # --- Password protection and intro page ---
