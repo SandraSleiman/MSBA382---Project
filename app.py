@@ -171,38 +171,42 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 🚨 Aggressive override for Streamlit icon hover bug */
+/* === FINAL FIX: Streamlit "Expand" icon white hover issue === */
 
-/* Make sure icons are white */
-button[kind="icon"] svg {
-    fill: white !important;
-    color: white !important;
-}
-
-/* Force background to stay transparent */
-button[kind="icon"] {
+/* Target the expand button by its title attribute */
+button[title="Expand"] {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-/* Force-hover icon state */
-button[kind="icon"]:hover {
-    background-color: rgba(255,255,255,0.05) !important;
+/* Icon itself */
+button[title="Expand"] svg {
+    fill: white !important;
+    color: white !important;
 }
 
-/* Kill the white popup square completely */
-div[data-testid="stElementToolbar"]::before,
-div[data-testid="stElementToolbar"] *,
-div[data-testid="stElementToolbar"] *::before,
-div[data-testid="stElementToolbar"] *::after {
+/* On hover: keep it dark-transparent */
+button[title="Expand"]:hover {
+    background-color: rgba(255,255,255,0.08) !important;
+}
+
+/* Remove the white flashing square (pseudo-element) */
+button[title="Expand"]::before,
+button[title="Expand"]::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    content: none !important;
+}
+
+/* Extra aggressive fallback */
+button[title="Expand"] * {
     background: transparent !important;
     color: white !important;
     fill: white !important;
-    border: none !important;
     box-shadow: none !important;
-    content: none !important;
-    display: none !important;
+    border: none !important;
 }
 
 
