@@ -116,15 +116,15 @@ if not st.session_state.authenticated:
     col1, col2 = st.columns([2, 2])
     
     with col1:
-    st.markdown("""
-        <h1 style='font-size: 42px; color: white;'>Sleep Health & Lifestyle Factors</h1>
-        <h3 style='font-size: 24px; color: white;'>MSBA 382 — Healthcare Analytics Project</h3>
-        <p style='font-size: 17px; max-width: 600px; color: white;'>
-            Welcome to this interactive dashboard exploring how lifestyle habits such as
-            alcohol consumption, caffeine intake, smoking, and physical activity influence
-            sleep efficiency and duration.
-        </p>
-    """, unsafe_allow_html=True)
+        st.markdown("""
+            <h1 style='font-size: 42px; color: white;'>Sleep Health & Lifestyle Factors</h1>
+            <h3 style='font-size: 24px; color: white;'>MSBA 382 — Healthcare Analytics Project</h3>
+            <p style='font-size: 17px; max-width: 600px; color: white;'>
+                Welcome to this interactive dashboard exploring how lifestyle habits such as
+                alcohol consumption, caffeine intake, smoking, and physical activity influence
+                sleep efficiency and duration.
+            </p>
+        """, unsafe_allow_html=True)
 
     
     with col2:
