@@ -142,31 +142,35 @@ button[kind="icon"]:hover {
     border-radius: 6px;
 }
 
-/* Fix expand (ellipsis "...") hover popup icon background */
+/* Fix expand (ellipsis "...") hover popup icon and background */
 button[kind="icon"] {
     background-color: transparent !important;
     color: #ffffff !important;
     fill: #ffffff !important;
     border-radius: 6px !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* Override the hover tooltip box that appears */
+/* Fix the hover popup container background */
 div[data-testid="stElementToolbar"] {
-    background-color: #1f2937 !important;
-    border: 1px solid #444444 !important;
-    color: #ffffff !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-/* Ensure icon inside stays white */
-div[data-testid="stElementToolbar"] svg {
+/* Ensure expand/search/download icons inside toolbar stay white */
+div[data-testid="stElementToolbar"] svg,
+div[data-testid="stElementToolbar"] * {
     fill: #ffffff !important;
     color: #ffffff !important;
 }
 
-/* Optional: hover style for extra clarity */
+/* Optional: on hover, show subtle dark tint */
 div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
+
 
 </style>
 """, unsafe_allow_html=True)
