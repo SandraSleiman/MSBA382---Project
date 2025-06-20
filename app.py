@@ -11,26 +11,25 @@ sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 # --- Custom CSS styling for consistent visual theme across filters, sliders, KPIs, login ---
 st.markdown("""
     <style>
-    /* General text styling */
+    /* General dark theme: override light/dark mode issues */
+    html, body, .main, .block-container, .stApp, section.main {
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
+    }
+
+    /* Text styling */
     body, p, h1, h2, h3, h4, h5, h6, label, span, div {
         color: #ffffff !important;
         font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* Apply dark background to full page, including main area */
-     html, body, .main, section.main, .block-container {
-        background-color: #1f2937 !important;
-        color: white !important;
-    }
-
-    }
-
     /* Sidebar background */
     section[data-testid="stSidebar"] {
-        background-color: #1f2937 !important;  /* slightly lighter dark */
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
     }
 
-    /* Sidebar filter components */
+    /* Sidebar components styling */
     section[data-testid="stSidebar"] div.stSlider > div,
     section[data-testid="stSidebar"] .stMultiSelect > div,
     section[data-testid="stSidebar"] .stSelectbox > div,
@@ -41,14 +40,14 @@ st.markdown("""
         border: 2px solid #fc8d62;
     }
 
-    /* Sidebar pills/chips */
+    /* Filter chips (tags) */
     section[data-testid="stSidebar"] .stMultiSelect span,
     section[data-testid="stSidebar"] .stSelectbox span {
         background-color: #66c2a5 !important;
         color: white !important;
     }
 
-    /* Slider track and thumb */
+    /* Slider styles */
     .stSlider > div > div > div:nth-child(1) > div {
         background: #fc8d62 !important;
     }
@@ -61,7 +60,7 @@ st.markdown("""
         background: #fc8d62 !important;
     }
 
-    /* KPI cards */
+    /* KPI card styling */
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -83,7 +82,7 @@ st.markdown("""
         margin-top: 5px;
     }
 
-    /* Inputs & toggles */
+    /* Focus ring removal */
     input:focus, textarea:focus, select:focus {
         outline: none !important;
         box-shadow: none !important;
@@ -95,16 +94,22 @@ st.markdown("""
         border: none !important;
     }
 
-    /* Ensure login text section shows correctly */
+    /* Force login intro container background + text white */
     section.main > div:has(.stTextInput) {
-        background-color: #111827 !important;
+        background-color: #1f2937 !important;
         color: white !important;
     }
     section.main > div:has(.stTextInput) * {
         color: white !important;
     }
+
+    /* Remove light footer */
+    footer, .css-164nlkn, .css-1lcbmhc {
+        background-color: #1f2937 !important;
+    }
     </style>
 """, unsafe_allow_html=True)
+
 
 # --- Password protection and intro page ---
 PASSWORD = "osb2025"
