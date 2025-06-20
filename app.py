@@ -10,168 +10,140 @@ sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 
 # --- Custom CSS styling for consistent visual theme across filters, sliders, KPIs, login ---
 st.markdown("""
-    <style>
-    /* General dark theme: override light/dark mode issues */
-    html, body, .main, .block-container, .stApp, section.main {
-        background-color: #1f2937 !important;
-        color: #ffffff !important;
-    }
+<style>
+html, body, .main, .block-container, .stApp, section.main {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+}
 
-    /* Text styling */
-    body, p, h1, h2, h3, h4, h5, h6, label, span, div {
-        color: #ffffff !important;
-        font-family: 'Helvetica Neue', sans-serif;
-    }
+/* Global font and text color */
+body, p, h1, h2, h3, h4, h5, h6, label, span, div {
+    color: #ffffff !important;
+    font-family: 'Helvetica Neue', sans-serif;
+}
 
-    /* Sidebar background */
-    section[data-testid="stSidebar"] {
-        background-color: #1f2937 !important;
-        color: #ffffff !important;
-    }
+/* Sidebar background */
+section[data-testid="stSidebar"] {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+}
 
-    /* Sidebar components styling */
-    section[data-testid="stSidebar"] div.stSlider > div,
-    section[data-testid="stSidebar"] .stMultiSelect > div,
-    section[data-testid="stSidebar"] .stSelectbox > div,
-    section[data-testid="stSidebar"] .stTextInput > div {
-        background-color: #ccece6;
-        border-radius: 5px;
-        padding: 6px;
-        border: 2px solid #fc8d62;
-    }
+/* Sidebar widgets */
+section[data-testid="stSidebar"] div.stSlider > div,
+section[data-testid="stSidebar"] .stMultiSelect > div,
+section[data-testid="stSidebar"] .stSelectbox > div,
+section[data-testid="stSidebar"] .stTextInput > div {
+    background-color: #ccece6;
+    border-radius: 5px;
+    padding: 6px;
+    border: 2px solid #fc8d62;
+}
 
-    /* Filter chips (tags) */
-    section[data-testid="stSidebar"] .stMultiSelect span,
-    section[data-testid="stSidebar"] .stSelectbox span {
-        background-color: #66c2a5 !important;
-        color: white !important;
-    }
+/* Pills/tags */
+section[data-testid="stSidebar"] .stMultiSelect span,
+section[data-testid="stSidebar"] .stSelectbox span {
+    background-color: #66c2a5 !important;
+    color: white !important;
+}
 
-    /* Slider styles */
-    .stSlider > div > div > div:nth-child(1) > div {
-        background: #fc8d62 !important;
-    }
-    .stSlider [role="slider"] {
-        background-color: #fc8d62 !important;
-        border: 1px solid #fc8d62 !important;
-    }
-    input[type="range"]::-webkit-slider-runnable-track,
-    input[type="range"]::-moz-range-track {
-        background: #fc8d62 !important;
-    }
+/* Slider styling */
+.stSlider > div > div > div:nth-child(1) > div {
+    background: #fc8d62 !important;
+}
+.stSlider [role="slider"] {
+    background-color: #fc8d62 !important;
+    border: 1px solid #fc8d62 !important;
+}
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-moz-range-track {
+    background: #fc8d62 !important;
+}
+section[data-testid="stSidebar"] .stSlider label,
+section[data-testid="stSidebar"] .stSlider span,
+section[data-testid="stSidebar"] .stSlider div {
+    color: #ffffff !important;
+}
 
-    /* KPI card styling */
-    .metric-container {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        padding-bottom: 20px;
-    }
-    .metric-box {
-        background: linear-gradient(90deg, #66c2a5, #fc8d62);
-        border-radius: 8px;
-        padding: 20px;
-        width: 100%;
-        color: white;
-        text-align: center;
-        font-weight: bold;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .metric-box .value {
-        font-size: 26px;
-        margin-top: 5px;
-    }
+/* KPI cards */
+.metric-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+.metric-box {
+    background: linear-gradient(90deg, #66c2a5, #fc8d62);
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.metric-box .value {
+    font-size: 26px;
+    margin-top: 5px;
+}
 
-    /* Focus ring removal */
-    input:focus, textarea:focus, select:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-    button[title="Show password"]:focus,
-    button[title="Hide password"]:focus {
-        outline: none !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
+/* Input focus styling */
+input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+button[title="Show password"]:focus,
+button[title="Hide password"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 
-    /* Force login intro container background + text white */
-    section.main > div:has(.stTextInput) {
-        background-color: #1f2937 !important;
-        color: white !important;
-    }
-    section.main > div:has(.stTextInput) * {
-        color: white !important;
-    }
+/* Login page override */
+section.main > div:has(.stTextInput) {
+    background-color: #1f2937 !important;
+    color: white !important;
+}
+section.main > div:has(.stTextInput) * {
+    color: white !important;
+}
 
-    /* Remove light footer */
-    footer, .css-164nlkn, .css-1lcbmhc {
-        background-color: #1f2937 !important;
-    }
+/* Header and footer dark */
+header,
+header[data-testid="stHeader"],
+footer,
+.css-164nlkn, .css-1lcbmhc,
+.css-18ni7ap.e8zbici2 {
+    background-color: #1f2937 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
-    /* Remove white Streamlit header and toolbar */
-    header,
-    header[data-testid="stHeader"],
-    .css-18ni7ap.e8zbici2 {
-        background-color: #1f2937 !important;
-        color: white !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Fix number color on slider labels and ticks */
-    section[data-testid="stSidebar"] .stSlider .css-1j4g3p9 {
-        color: #ffffff !important;
-    }
-
-    section[data-testid="stSidebar"] .stSlider span,
-    section[data-testid="stSidebar"] .stSlider label,
-    section[data-testid="stSidebar"] .stSlider div {
-        color: #ffffff !important;
-    }
-
-    /* Force icons and dataframe tool buttons to be visible in dark theme */
-    [data-testid="stToolbar"] svg,
-    [data-testid="stDownloadButton"] svg,
-    section.main button[title="Download"] svg,
-    section.main button[title="Search"] svg,
-    section.main button[title="Expand"] svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-    }
-
-    /* Fix Streamlit search and expand icons near dataframes */
-    button[kind="icon"] svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-    }
-
-    /* Dark background for dataframe preview */
-    .stDataFrame {
-        background-color: #1f2937 !important;
-        color: white !important;
-    }
-
-    /* Fix white background behind expand/search/download in dataframe */
-    [data-testid="stElementToolbar"],
-    [data-testid="stElementToolbar"] * {
-        background-color: transparent !important;
-        color: #ffffff !important;
-        fill: #ffffff !important;
-    }
-
-    /* Also fix the icon buttons */
-    button[kind="icon"] svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-    }
-
-    /* Optional: fix hover style */
-    [data-testid="stElementToolbar"] button:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    </style>
+/* Dataframe background and icon buttons */
+.stDataFrame {
+    background-color: #1f2937 !important;
+    color: white !important;
+}
+[data-testid="stElementToolbar"],
+[data-testid="stElementToolbar"] *,
+[data-testid="stToolbar"] svg,
+[data-testid="stDownloadButton"] svg,
+section.main button[title="Download"] svg,
+section.main button[title="Search"] svg,
+section.main button[title="Expand"] svg,
+button[kind="icon"] svg {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+[data-testid="stElementToolbar"] button:hover,
+button[kind="icon"]:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px;
+}
+</style>
 """, unsafe_allow_html=True)
+
 
 
 # --- Password protection and intro page ---
