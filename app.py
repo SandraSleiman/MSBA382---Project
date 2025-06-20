@@ -151,6 +151,20 @@ st.markdown("""
         color: white !important;
     }
 
+    /* Fix white background behind expand/search/download in dataframe */
+    [data-testid="stElementToolbar"],
+    [data-testid="stElementToolbar"] * {
+        background-color: transparent !important;
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
+
+    /* Also fix the icon buttons */
+    button[kind="icon"] svg {
+        fill: #ffffff !important;
+        color: #ffffff !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
