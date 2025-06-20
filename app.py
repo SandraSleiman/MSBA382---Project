@@ -17,9 +17,12 @@ st.markdown("""
         font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* Global background */
-    html, body, .main, section.main {
-        background-color: #111827 !important;  /* dark navy */
+    /* Apply dark background to full page, including main area */
+    html, body, .main, section.main, div.block-container {
+        background-color: #1f2937 !important;
+        color: white !important;
+    }
+
     }
 
     /* Sidebar background */
