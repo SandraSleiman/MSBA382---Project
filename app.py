@@ -107,6 +107,16 @@ st.markdown("""
     footer, .css-164nlkn, .css-1lcbmhc {
         background-color: #1f2937 !important;
     }
+
+    /* Remove white Streamlit header and toolbar */
+    header,
+    header[data-testid="stHeader"],
+    .css-18ni7ap.e8zbici2 {
+        background-color: #1f2937 !important;
+        color: white !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
