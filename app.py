@@ -117,6 +117,18 @@ st.markdown("""
         border: none !important;
         box-shadow: none !important;
     }
+
+    /* Fix number color on slider labels and ticks */
+    section[data-testid="stSidebar"] .stSlider .css-1j4g3p9 {
+        color: #ffffff !important;
+    }
+
+    section[data-testid="stSidebar"] .stSlider span,
+    section[data-testid="stSidebar"] .stSlider label,
+    section[data-testid="stSidebar"] .stSlider div {
+        color: #ffffff !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
