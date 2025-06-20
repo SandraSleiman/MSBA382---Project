@@ -171,43 +171,52 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* === FINAL FIX: Streamlit "Expand" icon white hover issue === */
+/* 🔧 FINAL FIX (Streamlit expand button white square + hover icon) */
 
-/* Target the expand button by its title attribute */
-button[title="Expand"] {
+/* Strong override for the toolbar wrapper */
+div[data-testid="stElementToolbar"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Override pseudo-elements (responsible for white box) */
+div[data-testid="stElementToolbar"]::before,
+div[data-testid="stElementToolbar"]::after {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    content: none !important;
+}
+
+/* Fix the actual expand button */
+div[data-testid="stElementToolbar"] button {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-/* Icon itself */
-button[title="Expand"] svg {
-    fill: white !important;
-    color: white !important;
+/* Icon inside button */
+div[data-testid="stElementToolbar"] button svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
 }
 
-/* On hover: keep it dark-transparent */
-button[title="Expand"]:hover {
-    background-color: rgba(255,255,255,0.08) !important;
-}
-
-/* Remove the white flashing square (pseudo-element) */
-button[title="Expand"]::before,
-button[title="Expand"]::after {
-    background: transparent !important;
-    box-shadow: none !important;
+/* On hover: no white flash */
+div[data-testid="stElementToolbar"] button:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
     border: none !important;
-    content: none !important;
+    box-shadow: none !important;
 }
 
-/* Extra aggressive fallback */
-button[title="Expand"] * {
+/* Handle internal elements */
+div[data-testid="stElementToolbar"] * {
     background: transparent !important;
-    color: white !important;
-    fill: white !important;
-    box-shadow: none !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
     border: none !important;
 }
+
 
 
 </style>
