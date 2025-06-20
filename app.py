@@ -129,6 +129,28 @@ st.markdown("""
         color: #ffffff !important;
     }
 
+    /* Force icons and dataframe tool buttons to be visible in dark theme */
+    [data-testid="stToolbar"] svg,
+    [data-testid="stDownloadButton"] svg,
+    section.main button[title="Download"] svg,
+    section.main button[title="Search"] svg,
+    section.main button[title="Expand"] svg {
+        fill: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* Fix Streamlit search and expand icons near dataframes */
+    button[kind="icon"] svg {
+        fill: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* Dark background for dataframe preview */
+    .stDataFrame {
+        background-color: #1f2937 !important;
+        color: white !important;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
