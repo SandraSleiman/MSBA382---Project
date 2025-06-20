@@ -272,6 +272,41 @@ div[data-testid="stElementToolbar"] > div > div {
     border: none !important;
 }
 
+/* ✅ Fix Streamlit DataFrame toolbar icon buttons (Search, Expand, Download) */
+[data-testid="stElementToolbar"] svg,
+[data-testid="stElementToolbarButtonIcon"] {
+    fill: white !important;
+    stroke: white !important;
+    color: white !important;
+}
+
+/* 🧽 Clean up white box hover or tooltip on these icons */
+button[aria-label="Download"],
+button[aria-label="Expand"],
+button[aria-label="Search"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+button[aria-label="Download"]:hover,
+button[aria-label="Expand"]:hover,
+button[aria-label="Search"]:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+}
+
+/* Kill white box around icons on hover */
+button[aria-label="Download"]::before,
+button[aria-label="Expand"]::before,
+button[aria-label="Search"]::before {
+    content: none !important;
+    background: none !important;
+    display: none !important;
+    box-shadow: none !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
