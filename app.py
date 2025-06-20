@@ -376,8 +376,6 @@ div[data-testid="stElementToolbar"] svg {
     color: #ffffff !important;
     fill: #ffffff !important;
 }
-</style>
-
 
 </style>
 """, unsafe_allow_html=True)
