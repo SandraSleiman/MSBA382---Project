@@ -171,44 +171,38 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ✅ FINAL FIX: Remove white hover box and ensure expand/search/download icons are white */
+/* 🚨 Aggressive override for Streamlit icon hover bug */
 
-/* Target the button and its icon */
-[data-testid="stElementToolbar"] button[kind="icon"],
-[data-testid="stElementToolbar"] button[kind="icon"] svg {
+/* Make sure icons are white */
+button[kind="icon"] svg {
+    fill: white !important;
+    color: white !important;
+}
+
+/* Force background to stay transparent */
+button[kind="icon"] {
     background-color: transparent !important;
-    color: #ffffff !important;
-    fill: #ffffff !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-/* When hovering over the icon */
-[data-testid="stElementToolbar"] button[kind="icon"]:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
-    fill: #ffffff !important;
-    border: none !important;
-    box-shadow: none !important;
+/* Force-hover icon state */
+button[kind="icon"]:hover {
+    background-color: rgba(255,255,255,0.05) !important;
 }
 
-/* Remove the ghost white box that appears when hovering */
-[data-testid="stElementToolbar"]::before,
-[data-testid="stElementToolbar"] *::before {
+/* Kill the white popup square completely */
+div[data-testid="stElementToolbar"]::before,
+div[data-testid="stElementToolbar"] *,
+div[data-testid="stElementToolbar"] *::before,
+div[data-testid="stElementToolbar"] *::after {
+    background: transparent !important;
+    color: white !important;
+    fill: white !important;
+    border: none !important;
+    box-shadow: none !important;
     content: none !important;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
     display: none !important;
-}
-
-/* Also fix the container's background */
-[data-testid="stElementToolbar"],
-[data-testid="stElementToolbar"] * {
-    background-color: transparent !important;
-    color: #ffffff !important;
-    fill: #ffffff !important;
-    border: none !important;
 }
 
 
