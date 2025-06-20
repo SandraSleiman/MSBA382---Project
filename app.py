@@ -247,6 +247,30 @@ button.st-emotion-cache-d0v1h0 svg {
     box-shadow: none !important;
 }
 
+/* 💀 Remove the white hover ghost box for expand icon */
+.stTooltipHoverTarget::before,
+.stTooltipHoverTarget::after {
+    background: transparent !important;
+    content: none !important;
+    display: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Remove background on tooltip popup itself */
+div[data-testid="stTooltipContent"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Hide that floating white square next to expand button */
+div[data-testid="stElementToolbar"] > div > div {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
