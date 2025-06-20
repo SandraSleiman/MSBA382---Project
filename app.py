@@ -11,12 +11,23 @@ sns.set_palette(["#66c2a5", "#fc8d62"])  # Two-tone aesthetic colors
 # --- Custom CSS styling for consistent visual theme across filters, sliders, KPIs, login ---
 st.markdown("""
     <style>
-    h1, h2, h3 {
-        color: #1a73e8;
+    /* General text styling */
+    body, p, h1, h2, h3, h4, h5, h6, label, span, div {
+        color: #ffffff !important;
         font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* Sidebar filter box styles */
+    /* Global background */
+    html, body, .main, section.main {
+        background-color: #111827 !important;  /* dark navy */
+    }
+
+    /* Sidebar background */
+    section[data-testid="stSidebar"] {
+        background-color: #1f2937 !important;  /* slightly lighter dark */
+    }
+
+    /* Sidebar filter components */
     section[data-testid="stSidebar"] div.stSlider > div,
     section[data-testid="stSidebar"] .stMultiSelect > div,
     section[data-testid="stSidebar"] .stSelectbox > div,
@@ -27,14 +38,14 @@ st.markdown("""
         border: 2px solid #fc8d62;
     }
 
-    /* Filter tag colors */
+    /* Sidebar pills/chips */
     section[data-testid="stSidebar"] .stMultiSelect span,
     section[data-testid="stSidebar"] .stSelectbox span {
         background-color: #66c2a5 !important;
         color: white !important;
     }
 
-    /* Slider styles */
+    /* Slider track and thumb */
     .stSlider > div > div > div:nth-child(1) > div {
         background: #fc8d62 !important;
     }
@@ -42,14 +53,12 @@ st.markdown("""
         background-color: #fc8d62 !important;
         border: 1px solid #fc8d62 !important;
     }
-    input[type="range"]::-webkit-slider-runnable-track {
-        background: #fc8d62 !important;
-    }
+    input[type="range"]::-webkit-slider-runnable-track,
     input[type="range"]::-moz-range-track {
         background: #fc8d62 !important;
     }
 
-    /* KPI card styles */
+    /* KPI cards */
     .metric-container {
         display: flex;
         justify-content: space-between;
@@ -71,13 +80,11 @@ st.markdown("""
         margin-top: 5px;
     }
 
-    /* Remove unwanted highlights on input focus */
+    /* Inputs & toggles */
     input:focus, textarea:focus, select:focus {
         outline: none !important;
         box-shadow: none !important;
     }
-
-    /* Remove square border around password toggle icon */
     button[title="Show password"]:focus,
     button[title="Hide password"]:focus {
         outline: none !important;
@@ -85,15 +92,13 @@ st.markdown("""
         border: none !important;
     }
 
-    /* Ensure all text is white in dark mode */
-    body, p, h1, h2, h3, h4, h5, h6, label, span, div {
-        color: #ffffff !important;
+    /* Ensure login text section shows correctly */
+    section.main > div:has(.stTextInput) {
+        background-color: #111827 !important;
+        color: white !important;
     }
-    section[data-testid="stSidebar"] label,
-    section[data-testid="stSidebar"] span,
-    section[data-testid="stSidebar"] div,
-    .stTextInput label {
-        color: #ffffff !important;
+    section.main > div:has(.stTextInput) * {
+        color: white !important;
     }
     </style>
 """, unsafe_allow_html=True)
