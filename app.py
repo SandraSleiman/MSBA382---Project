@@ -171,10 +171,15 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* --- FINAL FIX: expand/search/download icon hover and popup --- */
+/* ✅ FINAL FIX for white hover square on expand/search/download icons */
+[data-testid="stElementToolbar"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 
-/* Make icon button background transparent and icon white */
-button[kind="icon"] {
+/* Fix icon button container */
+[data-testid="stElementToolbar"] button {
     background-color: transparent !important;
     color: #ffffff !important;
     fill: #ffffff !important;
@@ -182,34 +187,28 @@ button[kind="icon"] {
     box-shadow: none !important;
 }
 
-/* Force hover background on icon to stay dark-transparent */
-button[kind="icon"]:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    border: none !important;
-}
-
-/* Fix the icon popup container (the square box appearing) */
-div[data-testid="stElementToolbar"] {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-/* Also fix inner elements inside popup */
-div[data-testid="stElementToolbar"] * {
-    background-color: transparent !important;
+/* Force icon SVG (expand/search/download) to stay white */
+[data-testid="stElementToolbar"] svg {
     color: #ffffff !important;
     fill: #ffffff !important;
 }
 
-/* Remove the white square that flashes on hover */
-div[data-testid="stElementToolbar"]::before {
-    background: transparent !important;
+/* Remove the rounded white tooltip bubble on hover */
+[data-testid="stElementToolbar"]::before {
+    display: none !important;
+    background: none !important;
     box-shadow: none !important;
     border: none !important;
     content: none !important;
 }
 
+/* Fix Streamlit popup tooltip as well */
+button[title="Expand"]:hover,
+button[title="Search"]:hover,
+button[title="Download"]:hover {
+    background-color: rgba(255,255,255,0.1) !important;
+    border: none !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
