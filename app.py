@@ -217,6 +217,35 @@ div[data-testid="stElementToolbar"] * {
     border: none !important;
 }
 
+/* 🔥 Target the exact expand button and kill white hover/box */
+button.st-emotion-cache-d0v1h0,
+button.st-emotion-cache-d0v1h0:hover {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Kill any hover effect square */
+button.st-emotion-cache-d0v1h0::before,
+button.st-emotion-cache-d0v1h0::after {
+    background: none !important;
+    content: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: none !important;
+}
+
+/* Make the icon itself white */
+button.st-emotion-cache-d0v1h0 svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+.stTooltipHoverTarget {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
 
 
 </style>
