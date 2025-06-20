@@ -18,7 +18,7 @@ st.markdown("""
     }
 
     /* Apply dark background to full page, including main area */
-    html, body, .main, section.main, div.block-container {
+     html, body, .main, section.main, .block-container {
         background-color: #1f2937 !important;
         color: white !important;
     }
