@@ -307,6 +307,41 @@ button[aria-label="Search"]::before {
     box-shadow: none !important;
 }
 
+<style>
+/* Force white color on all Streamlit toolbar icons */
+button[kind="icon"] svg,
+button[data-testid="stBaseButton-elementToolbar"] svg,
+div[data-testid="stElementToolbar"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* Remove white background square */
+button[kind="icon"],
+button[data-testid="stBaseButton-elementToolbar"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Kill pseudo elements that might cause white box */
+button[kind="icon"]::before,
+button[kind="icon"]::after,
+button[data-testid="stBaseButton-elementToolbar"]::before,
+button[data-testid="stBaseButton-elementToolbar"]::after {
+    content: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: none !important;
+}
+
+/* Fix on hover */
+button[kind="icon"]:hover,
+button[data-testid="stBaseButton-elementToolbar"]:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
