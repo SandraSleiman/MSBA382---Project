@@ -171,6 +171,45 @@ div[data-testid="stElementToolbar"] button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+/* --- FINAL FIX: expand/search/download icon hover and popup --- */
+
+/* Make icon button background transparent and icon white */
+button[kind="icon"] {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Force hover background on icon to stay dark-transparent */
+button[kind="icon"]:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: none !important;
+}
+
+/* Fix the icon popup container (the square box appearing) */
+div[data-testid="stElementToolbar"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Also fix inner elements inside popup */
+div[data-testid="stElementToolbar"] * {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* Remove the white square that flashes on hover */
+div[data-testid="stElementToolbar"]::before {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    content: none !important;
+}
+
 
 </style>
 """, unsafe_allow_html=True)
